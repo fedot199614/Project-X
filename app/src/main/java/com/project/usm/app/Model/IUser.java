@@ -1,9 +1,8 @@
 package com.project.usm.app.Model;
 
 public interface IUser {
-    String getEmail();
-    String getPassword();
+    boolean validationPhone();
     boolean isValidData();
-    String getToken();
-    int getId();
+    //some methods for webservicies
+
 }

@@ -1,7 +1,6 @@
 package com.project.usm.app.Fragments;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RV_Main extends Fragment {
+public class RV_Main extends Fragment{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -57,9 +55,6 @@ public class RV_Main extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
     }
 
     @Override
@@ -128,53 +123,23 @@ public class RV_Main extends Fragment {
 
         rv.setAdapter(adapter);
 
-
-
-
-
-
-
-
-
-
         rv.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), rv ,new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //setSharedElementReturnTransition(TransitionInflater.from(getActivity()).inflateTransition(R.transition.trans_move));
                 setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(1500));
-
                 SharedNews sn = new SharedNews();
-                //sn.setSharedElementEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(R.transition.trans_move));
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 sn.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(1500));
-
                 Bundle bundle = new Bundle();
-
                 bundle.putString("title", test.get(position).getTitle());
                 bundle.putString("news", test.get(position).getFull_news());
                 sn.setArguments(bundle);
-
-
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.addToBackStack(null);
                 transaction.addSharedElement(view.findViewById(R.id.cv), view.findViewById(R.id.cv).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.title_model), view.findViewById(R.id.title_model).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.news_model), view.findViewById(R.id.news_model).getTransitionName());
-
                 transaction.replace(R.id.mainFrame,sn).addToBackStack("news").commit();
-
-
-
-
-
-
-
-
-
-
             }
-
             @Override
             public void onLongItemClick(View view, int position) {
 
@@ -182,9 +147,6 @@ public class RV_Main extends Fragment {
         }));
     }
 
-
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -208,18 +170,8 @@ public class RV_Main extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         void onFragmentInteraction(Uri uri);
     }
 }

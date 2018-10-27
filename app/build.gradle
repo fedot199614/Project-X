@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-      defaultConfig {
+    defaultConfig {
         applicationId "com.project.usm.app"
         minSdkVersion 21
         targetSdkVersion 28
@@ -45,13 +45,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-   // implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
-   // implementation 'org.springframework.android:spring-android-auth:1.0.1.RELEASE'
+    // implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    // implementation 'org.springframework.android:spring-android-auth:1.0.1.RELEASE'
     //implementation 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
-    implementation ('org.springframework.android:spring-android-auth:1.+')  {
-        exclude group :'org.springframework', module: 'commons-logging'
-        exclude group :'org.springframework', module: 'spring-core'
-        exclude group :'org.springframework', module: 'spring-web'
+    implementation('org.springframework.android:spring-android-auth:1.+') {
+        exclude group: 'org.springframework', module: 'commons-logging'
+        exclude group: 'org.springframework', module: 'spring-core'
+        exclude group: 'org.springframework', module: 'spring-web'
     }
     implementation 'org.springframework.android:spring-android-core:1.+'
     implementation 'org.springframework.android:spring-android-rest-template:1.+'
