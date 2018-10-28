@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.project.usm.app.Fragments.Auth;
 import com.project.usm.app.Fragments.RV_Main;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,8 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Init Start Fragment
 
         RV_Main mainNewsList = new RV_Main();
+        Auth auth = new Auth();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame,mainNewsList);
+        ft.replace(R.id.mainFrame,auth);
 
         ft.commit();
 
