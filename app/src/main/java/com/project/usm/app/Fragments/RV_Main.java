@@ -129,7 +129,7 @@ public class RV_Main extends Fragment{
                 setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(1500));
                 SharedNews sn = new SharedNews();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                sn.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(1500));
+                sn.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(2000));
                 Bundle bundle = new Bundle();
                 bundle.putString("title", test.get(position).getTitle());
                 bundle.putString("news", test.get(position).getFull_news());
@@ -138,7 +138,7 @@ public class RV_Main extends Fragment{
                 transaction.addSharedElement(view.findViewById(R.id.cv), view.findViewById(R.id.cv).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.title_model), view.findViewById(R.id.title_model).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.news_model), view.findViewById(R.id.news_model).getTransitionName());
-                transaction.replace(R.id.mainFrame,sn).addToBackStack("news").commit();
+                transaction.replace(R.id.mainFrame,sn).commit();
             }
             @Override
             public void onLongItemClick(View view, int position) {

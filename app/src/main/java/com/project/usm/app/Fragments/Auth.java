@@ -1,18 +1,27 @@
 package com.project.usm.app.Fragments;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputEditText;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.project.usm.app.Presenter.Auth_Presenter;
 import com.project.usm.app.R;
 import com.project.usm.app.View.Auth_View;
 
 public class Auth extends Fragment implements Auth_View {
-
+    private  ProgressBar progressBar;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -57,6 +66,40 @@ public class Auth extends Fragment implements Auth_View {
         }
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle state) {
+        super.onActivityCreated(state);
+        TextView forgot = getActivity().findViewById(R.id.forgot);
+        Button registration = getActivity().findViewById(R.id.registration);
+        Button auth = getActivity().findViewById(R.id.registrationBtn);
+        TextInputEditText login = getActivity().findViewById(R.id.email);
+        TextInputEditText password = getActivity().findViewById(R.id.password);
+        progressBar = getActivity().findViewById(R.id.progressBarRegistration);
+        progressBar.setVisibility(View.VISIBLE);
+
+        auth.setOnClickListener(click->{
+            Auth_Presenter authPresenter = new Auth_Presenter(this);
+            authPresenter.onLogin(login.getText().toString(), password.getText().toString());
+
+        });
+        registration.setOnClickListener(click->{
+            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left).setDuration(1500));
+            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right).setDuration(3000));
+            Registration registrationFR = new Registration();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            registrationFR.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right).setDuration(3000));
+            registrationFR.setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left).setDuration(1500));
+            transaction.addToBackStack(null);
+            transaction.addSharedElement(getView().findViewById(R.id.cv_auth), getView().findViewById(R.id.cv_auth).getTransitionName());
+            transaction.replace(R.id.mainFrame,registrationFR).commit();
+        });
+        forgot.setOnClickListener(click->{
+
+        });
+
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -76,12 +119,12 @@ public class Auth extends Fragment implements Auth_View {
 
     @Override
     public void showLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

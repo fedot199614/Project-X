@@ -1,13 +1,16 @@
 package com.project.usm.app.Presenter;
 
+import com.project.usm.app.Fragments.Auth;
 import com.project.usm.app.View.Auth_View;
 
 public class Auth_Presenter implements IAuth_Presenter {
 
     Auth_View auth_view;
-    public void Auth_Presenter(Auth_View authView){
-        this.auth_view = authView;
+
+    public Auth_Presenter(Auth_View auth) {
+        this.auth_view = auth;
     }
+
 
 
     @Override

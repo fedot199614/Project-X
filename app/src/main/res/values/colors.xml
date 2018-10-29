@@ -8,5 +8,5 @@
     <color name="darkslategray">#35434e</color>color>
     <color name="darkslategray2">#1d282d</color>
     <color name ="white">#ffffff</color>
-
+    <color name="textClick">#c7c7c7</color>
 </resources>
