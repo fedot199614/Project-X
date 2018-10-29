@@ -1,7 +1,10 @@
 package com.project.usm.app.Fragments;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -126,15 +129,16 @@ public class RV_Main extends Fragment{
         rv.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), rv ,new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(1500));
+                setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left));
+                setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right));
                 SharedNews sn = new SharedNews();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                sn.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade).setDuration(2000));
+                sn.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right));
                 Bundle bundle = new Bundle();
                 bundle.putString("title", test.get(position).getTitle());
                 bundle.putString("news", test.get(position).getFull_news());
                 sn.setArguments(bundle);
-                transaction.addToBackStack(null);
+                transaction.addToBackStack("sharedNews");
                 transaction.addSharedElement(view.findViewById(R.id.cv), view.findViewById(R.id.cv).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.title_model), view.findViewById(R.id.title_model).getTransitionName());
                 transaction.addSharedElement(view.findViewById(R.id.news_model), view.findViewById(R.id.news_model).getTransitionName());
@@ -153,16 +157,7 @@ public class RV_Main extends Fragment{
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+
 
     @Override
     public void onDetach() {

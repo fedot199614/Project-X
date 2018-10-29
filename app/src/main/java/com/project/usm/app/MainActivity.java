@@ -3,7 +3,9 @@ package com.project.usm.app;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,10 +26,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void initHomePage(){
         RV_Main mainNewsList = new RV_Main();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.addToBackStack(null);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack("root");
         ft.replace(R.id.mainFrame,mainNewsList).commit();
+        Log.i("ggggggSTART",String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +67,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        //Log.i("gggggg",String.valueOf(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName()));
+       // Log.i("gggggg1",String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+        //Log.i("gggggg2",getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount()).getClass().getSimpleName());
+       //if(getSupportFragmentManager().getBackStackEntryCount() == 1) {
+           // finish();
+        //}
+        if(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName().equals("SharedNews")) {
+            getSupportFragmentManager().popBackStack("sharedNews", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }else if(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName().equals("RV_Main")){
+            finish();
+        }else if(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName().equals("Registration")){
+            getSupportFragmentManager().popBackStack("reg", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }else if(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName().equals("Auth")){
+            finish();
+        }
 
-        if(getFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        }
-        else {
-            getFragmentManager().popBackStack();
-        }
+       // switch(getSupportFragmentManager().getFragments().size()){
+         //   case :
+       // }
+       //else {
+           // super.onBackPressed();
+       //}
+
+        //if(getSupportFragmentManager().getFragments().get(0).getClass().getSimpleName().equals("SharedNews")){
+           // getSupportFragmentManager().findFragmentByTag("root").
+        //}
+
+
 
     }
 
@@ -112,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logIn) {
             Auth auth = new Auth();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.addToBackStack(null);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.addToBackStack("auth");
             ft.replace(R.id.mainFrame,auth).commit();
         }
 

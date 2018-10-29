@@ -1,11 +1,13 @@
 package com.project.usm.app.Fragments;
 
-import android.app.FragmentTransaction;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.transition.TransitionInflater;
@@ -21,7 +23,7 @@ import com.project.usm.app.R;
 import com.project.usm.app.View.Auth_View;
 
 public class Auth extends Fragment implements Auth_View {
-    private  ProgressBar progressBar;
+    private ProgressBar progressBar;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -78,38 +80,29 @@ public class Auth extends Fragment implements Auth_View {
         progressBar = getActivity().findViewById(R.id.progressBarRegistration);
         progressBar.setVisibility(View.VISIBLE);
 
-        auth.setOnClickListener(click->{
+        auth.setOnClickListener(click -> {
             Auth_Presenter authPresenter = new Auth_Presenter(this);
             authPresenter.onLogin(login.getText().toString(), password.getText().toString());
 
         });
-        registration.setOnClickListener(click->{
-            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left).setDuration(1500));
-            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right).setDuration(3000));
+        registration.setOnClickListener(click -> {
+            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left));
+            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right));
             Registration registrationFR = new Registration();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            registrationFR.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right).setDuration(3000));
-            registrationFR.setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left).setDuration(1500));
-            transaction.addToBackStack(null);
+            registrationFR.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_right));
+            registrationFR.setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.slide_left));
+            transaction.addToBackStack("reg");
             transaction.addSharedElement(getView().findViewById(R.id.cv_auth), getView().findViewById(R.id.cv_auth).getTransitionName());
-            transaction.replace(R.id.mainFrame,registrationFR).commit();
+            transaction.replace(R.id.mainFrame, registrationFR).commit();
         });
-        forgot.setOnClickListener(click->{
+        forgot.setOnClickListener(click -> {
 
         });
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+
 
     @Override
     public void onDetach() {
