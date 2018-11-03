@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.project.usm.app.View.Auth_View;
 
 public class Auth extends Fragment implements Auth_View {
     private ProgressBar progressBar;
+    private TextInputEditText login;
+    private TextInputEditText password;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -75,10 +78,10 @@ public class Auth extends Fragment implements Auth_View {
         TextView forgot = getActivity().findViewById(R.id.forgot);
         Button registration = getActivity().findViewById(R.id.registration);
         Button auth = getActivity().findViewById(R.id.registrationBtn);
-        TextInputEditText login = getActivity().findViewById(R.id.email);
-        TextInputEditText password = getActivity().findViewById(R.id.password);
-        progressBar = getActivity().findViewById(R.id.progressBarRegistration);
-        progressBar.setVisibility(View.VISIBLE);
+        login = getActivity().findViewById(R.id.email);
+        password = getActivity().findViewById(R.id.password);
+        progressBar = getActivity().findViewById(R.id.progressBarAuth);
+        progressBar.setVisibility(View.INVISIBLE);
 
         auth.setOnClickListener(click -> {
             Auth_Presenter authPresenter = new Auth_Presenter(this);
@@ -112,17 +115,31 @@ public class Auth extends Fragment implements Auth_View {
 
     @Override
     public void showLoading() {
+
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
+
         progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onLoginMessage() {
 
+    }
+
+    @Override
+    public void showErrorValidation(int errorCodeValidation) {
+
+        if(errorCodeValidation==0) {
+            login.setError("Логин не может быть пустым");
+        }else if(errorCodeValidation==1){
+            login.setError("Неверный формат логина.");
+        }else if(errorCodeValidation==2){
+            password.setError("Слишком короткий пароль");
+        }
     }
 
     public interface OnFragmentInteractionListener {

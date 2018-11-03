@@ -1,21 +1,18 @@
 package com.project.usm.app.Fragments;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.project.usm.app.R;
 
 
 public class Registration extends Fragment {
-
+    private ProgressBar progressBar;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -63,6 +60,16 @@ public class Registration extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityCreated(Bundle state) {
+        super.onActivityCreated(state);
+
+        progressBar = getActivity().findViewById(R.id.progressBarAuth);
+        progressBar.setVisibility(View.INVISIBLE);
+
+
+
+    }
 
 
     @Override

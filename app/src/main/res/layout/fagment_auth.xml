@@ -65,6 +65,8 @@
                     android:layout_marginEnd="8dp"
                     android:hint="Введите Email"
                     android:textColorHint="@color/backGroundMain"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/TextAppearance.AppCompat"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +75,7 @@
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/email"
-                        android:layout_width="228dp"
+                        android:layout_width="215dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/allerta"
                         android:inputType="textPostalAddress"
@@ -93,6 +95,7 @@
                     android:layout_marginEnd="8dp"
                     android:hint="Пароль"
                     android:textColorHint="@color/backGroundMain"
+                    app:errorEnabled="true"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +104,7 @@
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/password"
-                        android:layout_width="228dp"
+                        android:layout_width="215dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/allerta"
                         android:inputType="textPassword"
@@ -125,7 +128,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textInput_LayoutPass" />
 
                 <ProgressBar
-                    android:id="@+id/progressBarRegistration"
+                    android:id="@+id/progressBarAuth"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="31dp"
                     android:layout_height="31dp"
@@ -172,7 +175,7 @@
                     android:text="Create new account?"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/customColor"
-                    app:layout_constraintBottom_toTopOf="@+id/progressBarRegistration"
+                    app:layout_constraintBottom_toTopOf="@+id/progressBarAuth"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/registrationBtn"

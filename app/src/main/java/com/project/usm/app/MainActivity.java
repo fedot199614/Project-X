@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,10 +15,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import com.project.usm.app.Fragments.Auth;
 import com.project.usm.app.Fragments.RV_Main;
+import com.project.usm.app.AOP.Loggable;
 
+@Loggable
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
 
 
 
@@ -29,8 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.addToBackStack("root");
         ft.replace(R.id.mainFrame,mainNewsList).commit();
-        Log.i("ggggggSTART",String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
 
     @Override
     public void onBackPressed() {

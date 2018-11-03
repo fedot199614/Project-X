@@ -1,8 +1,11 @@
 package com.project.usm.app.Model;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
-import android.util.Printer;
+
+
+
 
 public class User implements IUser {
 
@@ -14,6 +17,10 @@ public class User implements IUser {
     private String phone;
     private int id;
 
+    public User(String email,String pass){
+        this.email =email;
+        this.password = pass;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
@@ -69,10 +76,20 @@ public class User implements IUser {
         return false;
     }
 
+
     @Override
-    public boolean isValidData() {
+    public int isValidData() {
+        int code = -1;
+        if(TextUtils.isEmpty(getEmail())){
+            code = 0;
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()){
+            code = 1;
+        }else if(getPassword().length()<6){
+            code = 2;
+        }
+
         //Data Validation
-        return !TextUtils.isEmpty(getEmail()) && Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches() && getPassword().length()>6;
+        return code;
     }
 
 
