@@ -4,10 +4,11 @@ import com.project.usm.app.Fragments.Auth;
 import com.project.usm.app.Model.User;
 import com.project.usm.app.View.Auth_View;
 
+import javax.inject.Inject;
+
 public class Auth_Presenter implements IAuth_Presenter {
 
     Auth_View auth_view;
-
     public Auth_Presenter(Auth_View auth) {
         this.auth_view = auth;
     }
